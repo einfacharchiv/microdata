@@ -1,0 +1,33 @@
+{
+    "name": "einfacharchiv/microdata",
+    "description": "Extract billing data from HTML (supporting Microdata and JSON-LD)",
+    "keywords": [
+        "einfachArchiv",
+        "php",
+        "html",
+        "data-extraction",
+        "microdata",
+        "json-ld"
+    ],
+    "type": "library",
+    "homepage": "https://github.com/einfachArchiv/microdata",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Philip Günther",
+            "email": "support@einfacharchiv.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {
+        "php": "~7.0",
+        "nesbot/carbon": "~1.25|~2.0",
+        "commerceguys/intl": "~1.0",
+        "jkphl/micrometa": "~3.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "einfachArchiv\\Microdata\\": "src/"
+        }
+    }
+}
