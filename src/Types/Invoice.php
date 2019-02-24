@@ -24,7 +24,9 @@ class Invoice extends Thing
      */
     public function getPaymentDueDate()
     {
-        return (new DateTime($this->getPropertyByName('paymentDueDate')))->toDateString();
+        $date = $this->getPropertyByName('paymentDueDate') ?? $this->getPropertyByName('paymentDue');
+
+        return (new DateTime($date))->toDateString();
     }
 
     /**
