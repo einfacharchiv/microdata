@@ -19,7 +19,7 @@ class DateTime extends DataType
     }
 
     /**
-     * Returns a date string.
+     * Returns the date string.
      *
      * @return string|null
      */
@@ -30,5 +30,15 @@ class DateTime extends DataType
         if (!is_null($carbon)) {
             return $carbon->toDateString();
         }
+    }
+
+    /**
+     * Returns the date string.
+     *
+     * @return string
+     */
+    public function __toString()
+    {
+        return (string) $this->toDateString();
     }
 }

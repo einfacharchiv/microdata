@@ -33,8 +33,16 @@ class Enumeration
      */
     public function getValue()
     {
-        $member = basename($this->member);
+        return in_array($this->member, $this->members) ? $this->member : null;
+    }
 
-        return in_array($member, $this->members) ? $member : null;
+    /**
+     * Returns the value.
+     *
+     * @return string
+     */
+    public function __toString()
+    {
+        return (string) $this->getValue();
     }
 }

@@ -10,10 +10,10 @@ class PaymentStatusType extends Enumeration
      * @var array
      */
     protected $members = [
-        'PaymentAutomaticallyApplied',
-        'PaymentComplete',
-        'PaymentDeclined',
-        'PaymentDue',
-        'PaymentPastDue',
+        'http://schema.org/PaymentAutomaticallyApplied',
+        'http://schema.org/PaymentComplete',
+        'http://schema.org/PaymentDeclined',
+        'http://schema.org/PaymentDue',
+        'http://schema.org/PaymentPastDue',
     ];
 }

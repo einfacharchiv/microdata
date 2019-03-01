@@ -3,10 +3,22 @@
 namespace einfachArchiv\Microdata\Types;
 
 use einfachArchiv\Microdata\DataTypes\DateTime;
+use einfachArchiv\Microdata\DataTypes\Duration;
+use einfachArchiv\Microdata\Enumerations\PaymentMethod;
 use einfachArchiv\Microdata\Enumerations\PaymentStatusType;
 
 class Invoice extends Thing
 {
+    /**
+     * Returns the billing period.
+     *
+     * @return string|null
+     */
+    public function getBillingPeriod()
+    {
+        return new Duration($this->getPropertyByName('billingPeriod'));
+    }
+
     /**
      * Returns the confirmation number.
      *
@@ -18,52 +30,72 @@ class Invoice extends Thing
     }
 
     /**
-     * Returns the payment due date.
+     * Returns the customer.
      *
-     * @return string|null
+     * @return Organization|Person|null
      */
-    public function getPaymentDueDate()
+    public function getCustomer()
     {
-        $date = $this->getPropertyByName('paymentDueDate') ?? $this->getPropertyByName('paymentDue');
-
-        return (new DateTime($date))->toDateString();
+        return $this->getPropertyByName('customer');
     }
 
     /**
-     * Returns the total payment due.
+     * Returns the payment due date.
      *
-     * @return array|null
+     * @return DateTime|null
      */
-    public function getTotalPaymentDue()
+    public function getPaymentDueDate()
     {
-        $property = $this->getPropertyByName('totalPaymentDue');
+        return new DateTime($this->getPropertyByName('paymentDueDate') ?? $this->getPropertyByName('paymentDue'));
+    }
 
-        if ($property instanceof MonetaryAmount || $property instanceof PriceSpecification) {
-            return $property->getAmount();
-        }
+    /**
+     * Returns the payment method.
+     *
+     * @return PaymentMethod|null
+     */
+    public function getPaymentMethod()
+    {
+        return new PaymentMethod($this->getPropertyByName('paymentMethod'));
+    }
+
+    /**
+     * Returns the payment method id.
+     *
+     * @return string|null
+     */
+    public function getPaymentMethodId()
+    {
+        return $this->getPropertyByName('paymentMethodId');
     }
 
     /**
      * Returns the payment status.
      *
-     * @return string|null
+     * @return PaymentStatusType|null
      */
     public function getPaymentStatus()
     {
-        return (new PaymentStatusType($this->getPropertyByName('paymentStatus')))->getValue();
+        return new PaymentStatusType($this->getPropertyByName('paymentStatus'));
     }
 
     /**
      * Returns the provider.
      *
-     * @return mixed
+     * @return Organization|Person|null
      */
     public function getProvider()
     {
-        $property = $this->getPropertyByName('provider');
+        return $this->getPropertyByName('provider');
+    }
 
-        if ($property instanceof Organization || $property instanceof Person) {
-            return $property;
-        }
+    /**
+     * Returns the total payment due.
+     *
+     * @return MonetaryAmount|PriceSpecification|null
+     */
+    public function getTotalPaymentDue()
+    {
+        return $this->getPropertyByName('totalPaymentDue');
     }
 }

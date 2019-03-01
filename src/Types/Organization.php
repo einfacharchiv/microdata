@@ -7,15 +7,11 @@ class Organization extends Thing
     /**
      * Returns the address.
      *
-     * @return mixed
+     * @return PostalAddress|null
      */
     public function getAddress()
     {
-        $property = $this->getPropertyByName('address');
-
-        if ($property instanceof PostalAddress) {
-            return $property;
-        }
+        return $this->getPropertyByName('address');
     }
 
     /**

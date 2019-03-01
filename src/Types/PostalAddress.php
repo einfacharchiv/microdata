@@ -7,7 +7,7 @@ class PostalAddress extends Thing
     /**
      * Returns the address country.
      *
-     * @return string|null
+     * @return Country|string|null
      */
     public function getAddressCountry()
     {

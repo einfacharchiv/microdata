@@ -27,18 +27,45 @@ $microdata = new Microdata($html);
 // Get all invoice items
 foreach ($microdata->getItemsByType('Invoice') as $item) {
     // Available methods
-    $item->getTotalPaymentDue();
-    $item->getPaymentDueDate();
+    (string) $item->getBillingPeriod() ?: null;
     $item->getConfirmationNumber();
-    $item->getPaymentStatus();
+
+    if ($item->getCustomer()) {
+        (string) $item->getCustomer()->getIdentifier() ?: null;
+        $item->getCustomer()->getName();
+
+        if ($item->getCustomer()->getAddress()) {
+            $item->getCustomer()->getAddress()->getStreetAddress();
+            $item->getCustomer()->getAddress()->getPostOfficeBoxNumber();
+            $item->getCustomer()->getAddress()->getPostalCode();
+            $item->getCustomer()->getAddress()->getAddressLocality();
+            $item->getCustomer()->getAddress()->getAddressRegion();
+            (string) $item->getCustomer()->getAddress()->getAddressCountry() ?: null;
+        }
+
+        $item->getCustomer()->getEmail();
+        $item->getCustomer()->getTelephone();
+        $item->getCustomer()->getUrl();
+
+        $item->getCustomer()->getTaxId();
+        $item->getCustomer()->getVatId();
+    }
+
+    (string) $item->getPaymentDueDate() ?: null;
+    (string) $item->getPaymentMethod() ?: null;
+    $item->getPaymentMethodId();
+    (string) $item->getPaymentStatus() ?: null;
 
     if ($item->getProvider()) {
         $item->getProvider()->getName();
 
         if ($item->getProvider()->getAddress()) {
             $item->getProvider()->getAddress()->getStreetAddress();
+            $item->getProvider()->getAddress()->getPostOfficeBoxNumber();
             $item->getProvider()->getAddress()->getPostalCode();
             $item->getProvider()->getAddress()->getAddressLocality();
+            $item->getProvider()->getAddress()->getAddressRegion();
+            (string) $item->getProvider()->getAddress()->getAddressCountry() ?: null;
         }
 
         $item->getProvider()->getEmail();
@@ -48,6 +75,14 @@ foreach ($microdata->getItemsByType('Invoice') as $item) {
         $item->getProvider()->getTaxId();
         $item->getProvider()->getVatId();
     }
+
+    if ($item->getTotalPaymentDue()) {
+        $item->getTotalPaymentDue()->getAmount(); // Returns an array with 'amount' and 'currency'
+    }
+
+    (string) $item->getIdentifier() ?: null;
+    $item->getName();
+    $item->getUrl();
 }
 ```
 
