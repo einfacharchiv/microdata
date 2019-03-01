@@ -28,7 +28,7 @@ class Duration extends DataType
         $carbonPeriod = $this->carbonPeriod();
 
         if (!is_null($carbonPeriod)) {
-            return $carbonPeriod->getStartDate();
+            return $carbonPeriod->getStartDate()->toDateString();
         }
     }
 
@@ -42,7 +42,7 @@ class Duration extends DataType
         $carbonPeriod = $this->carbonPeriod();
 
         if (!is_null($carbonPeriod)) {
-            return $carbonPeriod->getEndDate();
+            return $carbonPeriod->getEndDate()->toDateString();
         }
     }
 
