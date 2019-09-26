@@ -67,6 +67,12 @@ class Duration extends DataType
      */
     public function __toString()
     {
-        return (string) $this->getStartDate();
+        try {
+            $startDate = (string) $this->getStartDate();
+        } catch (\Exception $exception) {
+            $startDate = '';
+        }
+
+        return $startDate;
     }
 }
