@@ -5,7 +5,7 @@
 This package provides an easy way to extract billing data from Microdata and JSON-LD in an HTML document.
 
 ## Requirements
-PHP 7.0 and later.
+PHP 7.2.5 and later.
 
 ## Installation
 You can install this package via [Composer](http://getcomposer.org). Run the following command:
